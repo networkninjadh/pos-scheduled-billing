@@ -1,0 +1,17 @@
+/** TODO **/
+Task list :
+
+1.) Set up each individual pos-api app
+5.) Create a Jenkin project for Microservice pos-api
+4.) Set up Jenkinsfile for each project
+5.) Create CI/CD pipeline
+6.) Add external logs and tracing
+7.) Set up graphana to monitor Microservices 
+
+Initialize environment
+    set up Kubernetes cluster
+    set up docker for each project
+Replicate 3 environments  dev/test/prod
+Decide on hosting platform
+Create caching mechanism
+Set up Kafka
