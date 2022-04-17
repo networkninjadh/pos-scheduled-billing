@@ -14,31 +14,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Build Stage"
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
+                sh 'mvn -D maven.test.failure.ignore=true install'
             }
 
         }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-              post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml'
-                }
-              }
-        }
-
-
-
-        /*
-        stage('Test') {
-        }
-
-        stage('package') {
-
-        }
-        */
     }
 }
