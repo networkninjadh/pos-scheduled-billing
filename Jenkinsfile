@@ -8,6 +8,7 @@ pipeline {
             steps {
                 echo "PATH = ${PATH}"
             }
+
         }
 
         stage('Build') {
@@ -15,27 +16,27 @@ pipeline {
                 echo "Build Stage"
                 sh 'mvn -D maven.test.failure.ignore=true install'
             }
+
         }
 
         stage('Test') {
             steps {
                 sh 'mvn test'
             }
-
+              post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+              }
         }
 
-   stage ('Package') {
+        stage('package') {
             steps {
                 sh 'mvn clean package'
                 sh 'docker build -t pos-scheduled-billing .'
-                sh 'docker run --network="host" -p8085:8085 pos-scheduled-billing'
+                sh 'docker run --network="host" -d -p8085:8085 pos-scheduled-billing'
             }
         }
 
-        stage('Deploy') {
-            steps {
-
-            }
-        }
     }
 }
