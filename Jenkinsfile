@@ -34,7 +34,8 @@ pipeline {
             steps {
                 sh 'mvn clean package'
                 sh 'docker build -t pos-scheduled-billing .'
-                sh 'docker run --network="host" -d -p8085:8085 pos-scheduled-billing'
+                sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
+                sh 'docker push networkninjadh/pos-scheduled-billing:latest'
             }
         }
 
